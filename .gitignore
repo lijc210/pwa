@@ -1,0 +1,10 @@
+# Node modules
+**/node_modules/**
+
+.history
+.DS_Store
+__pycache__
+.vscode/launch.json
+*.log
+
+
