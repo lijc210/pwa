@@ -2,4 +2,4 @@
 
 npm install express
 
-node src/server.js
+node server.js
