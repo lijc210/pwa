@@ -1,12 +1,15 @@
 // 定义静态资源列表
 const staticAssets = ["./", "./app.css", "./app.js"];
+const staticCacheName = "static-assets";
+const dynamicCacheName = "dynamic-assets";
+let cache;
 
 // 当 Service Worker 安装时触发，用于缓存静态资源
 self.addEventListener("install", async (event) => {
   console.log("sw install"); // 在控制台输出安装信息
 
   // 打开一个名为 "static-assets" 的缓存
-  const cache = await caches.open("static-assets");
+  const cache = await caches.open(staticCacheName);
 
   // 将静态资源添加到缓存中
   cache.addAll(staticAssets);
@@ -26,7 +29,8 @@ self.addEventListener("fetch", async (event) => {
     event.respondWith(cacheFirst(req)); // 使用 cacheFirst 函数处理请求
   } else {
     // 否则使用网络优先策略
-    event.respondWith(networkFirst(req)); // 使用 networkFirst 函数处理请求
+    // event.respondWith(networkFirst(req)); // 使用 networkFirst 函数处理请求
+    event.respondWith(cacheFirst(req)); // 使用 cacheFirst 函数处理请求
   }
 });
 
@@ -35,13 +39,24 @@ async function cacheFirst(req) {
   // 尝试从缓存中获取匹配请求的响应
   const cachedResponse = await caches.match(req);
   // 如果缓存中存在匹配的响应，则直接返回缓存中的响应，否则向网络发起请求获取响应
-  return cachedResponse || fetch(req);
+  console.log("cache first", cachedResponse);
+  if (cachedResponse) {
+    return cachedResponse;
+  } else {
+    // 向网络发起请求获取响应
+    const res = await fetch(req);
+    // 将获取的响应存入缓存中
+    const cache = await caches.open(dynamicCacheName);
+    cache.put(req, res.clone());
+    // 返回获取的响应
+    return res;
+  }
 }
 
 // 定义网络优先策略：先向网络发起请求获取响应，若请求失败则从缓存中获取响应，若缓存中没有则返回错误信息
 async function networkFirst(req) {
   // 打开一个名为 "topics-dynamic" 的缓存
-  const cache = await caches.open("topics-dynamic");
+  const cache = await caches.open(dynamicCacheName);
 
   try {
     // 向网络发起请求获取响应
@@ -49,6 +64,7 @@ async function networkFirst(req) {
     // 将获取的响应存入缓存中
     cache.put(req, res.clone());
     // 返回获取的响应
+    console.log("network first", res);
     return res;
   } catch (error) {
     // 如果请求失败，则从缓存中获取匹配请求的响应

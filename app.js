@@ -14,9 +14,25 @@ function createTopic(topic) {
   return `
     <div class="topic">
       <img src="${topic.author.avatar_url}" alt=""/>
-      <div class="title">${topic.title}</div>
+      <div class="title" onclick="createArticle('${topic.id}')">${topic.title}</div>
     </div>
   `;
+}
+
+function createArticle(id) {
+  const res = fetch(`https://cnodejs.org/api/v1/topic/${id}`);
+  res.then(async (res) => {
+    const article = await res.json();
+    console.log(article);
+    const newWindow = window.open("", "_blank");
+    newWindow.document.body.innerHTML = `
+      <div class="article">
+        <img src="${article.data.author.avatar_url}" alt=""/>
+        <div class="title">${article.data.title}</div>
+        <div class="content">${article.data.content}</div>
+      </div>
+    `;
+  });
 }
 
 window.addEventListener("load", (e) => {

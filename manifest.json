@@ -12,25 +12,74 @@
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "/assets/icon/chrome-mask-512.png",
-            "sizes": "512x512",
-            "purpose": "maskable",
-            "type": "image/png"
-        },
-        {
-            "src": "/assets/icon/chrome-mask-192.png",
-            "sizes": "192x192",
-            "purpose": "maskable",
-            "type": "image/png"
-        },
-        {
-            "src": "/assets/icon/chrome-512.png",
+            "src": "/static/icons/icon.png",
             "sizes": "512x512",
             "type": "image/png"
         },
         {
-            "src": "/assets/icon/chrome-192.png",
-            "sizes": "192x192",
+            "src": "/static/icons/128x128@2x.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/128x128.png",
+            "sizes": "128x128",
+            "purpose": "maskable",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square310x310Logo.png",
+            "sizes": "310x310",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square284x284Logo.png",
+            "sizes": "284x284",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square150x150Logo.png",
+            "sizes": "150x150",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square144x144Logo.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square142x142Logo.png",
+            "sizes": "142x142",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square107x107Logo.png",
+            "sizes": "107x107",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square89x89Logo.png",
+            "sizes": "89x89",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square71x71Logo.png",
+            "sizes": "71x71",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square44x44Logo.png",
+            "sizes": "44x44",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/Square30x30Logo.png",
+            "sizes": "30x30",
             "type": "image/png"
         }
     ],
