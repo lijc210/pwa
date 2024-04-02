@@ -2,7 +2,7 @@
 const staticAssets = [
   "/",
   "/index.html",
-  "/static/js/sw.js",
+  "/sw.js",
   "/static/js/app.js",
   "/static/css/app.css",
 ];
@@ -28,6 +28,12 @@ self.addEventListener("fetch", async (event) => {
   const req = event.request;
   // 解析请求的 URL
   const url = new URL(req.url);
+
+  // 检查请求的来源是否为浏览器扩展
+  if (url.origin.startsWith("chrome-extension://")) {
+    // 如果是浏览器扩展的请求，则不对其进行处理，直接返回
+    return;
+  }
 
   // 如果请求的是同源资源，则使用缓存优先策略
   if (url.origin === location.origin) {
@@ -66,10 +72,10 @@ async function networkFirst(req) {
   try {
     // 向网络发起请求获取响应
     const res = await fetch(req);
+    console.log("network first", res);
     // 将获取的响应存入缓存中
     cache.put(req, res.clone());
     // 返回获取的响应
-    console.log("network first", res);
     return res;
   } catch (error) {
     // 如果请求失败，则从缓存中获取匹配请求的响应

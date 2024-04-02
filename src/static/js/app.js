@@ -40,7 +40,7 @@ window.addEventListener("load", (e) => {
   // 注册 serviceWorker
   if ("serviceWorker" in navigator) {
     try {
-      navigator.serviceWorker.register("static/js/sw.js");
+      navigator.serviceWorker.register("sw.js");
       console.log("serviceWorker register success!");
     } catch (error) {
       console.log("serviceWorker register failure!");
