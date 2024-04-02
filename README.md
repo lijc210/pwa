@@ -1,6 +1,5 @@
-#pwa_test
+# pwa_test
 
 npm install express
 
-
-node server.js
+node src/server.js
