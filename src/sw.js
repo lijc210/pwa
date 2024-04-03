@@ -1,10 +1,10 @@
 // 定义静态资源列表
 const staticAssets = [
   "/",
-  "/index.html",
-  "/sw.js",
-  "/static/js/app.js",
-  "/static/css/app.css",
+  "index.html",
+  "sw.js",
+  "static/js/app.js",
+  "static/css/app.css",
 ];
 const staticCacheName = "static-assets";
 const dynamicCacheName = "dynamic-assets";
